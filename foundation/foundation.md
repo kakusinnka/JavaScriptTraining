@@ -3,5 +3,6 @@
 ## test0002 变量, 函数提升
 ## test0003 JS 异步编程 Promise async await
 ## test0004 Canvas
+## test0005 XMLHttpRequest
 
 

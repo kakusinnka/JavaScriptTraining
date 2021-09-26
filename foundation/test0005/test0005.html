@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST0005</title>
+    <script src="./test0005.js"></script>
+</head>
+
+<body>
+    <form action="" id="form">
+        <input type="text" name="title" />
+        <input type="submit" />
+    </form>
+<!-- XMLHttpRequest post form  start -->
+    <script>
+        // 获取form表单
+        const form = document.getElementById('form');
+        // 添加submit事件
+        form.addEventListener('submit', function () {
+            //阻止默认提交行为
+            event.preventDefault();
+            // 调用自定义请求方法
+            // post('http://127.0.0.1:3000/dologin', new FormData(this));
+
+            // 使用HD.get静态方法发送GET请求
+            HD.get('http://127.0.0.1:3000/', {
+                responseType: 'text',
+            }).then((response) => {
+                console.log(response)
+            })
+
+            // 使用HD.post静态方法发送POST请求
+            HD.post('http://127.0.0.1:3000/dologin', {
+                responseType: 'text',
+            }).then((response) => {
+                console.log(response)
+            })
+        })
+
+        // 自定义请求方法
+        function post(url, data) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', url);
+            xhr.send(data)
+            xhr.onload = () => {
+                if (xhr.status == 200) {
+                    console.log(xhr.response)
+                } else {
+                    console.log(`${xhr.status}:${xhr.statusText}`)
+                }
+            }
+        }
+    </script>
+<!-- XMLHttpRequest post form  end -->
+</body>
+
+</html>

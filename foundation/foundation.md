@@ -4,5 +4,6 @@
 ## test0003 JS 异步编程 Promise async await
 ## test0004 Canvas
 ## test0005 XMLHttpRequest
+## test0006 事件
 
 

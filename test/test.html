@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,25 @@
     <title>TEST</title>
     <script src="./test.js"></script>
 </head>
+
 <body>
-    
+    <div id="app">houdunren.com</div>
+    <script>
+      const app = document.querySelector('#app')
+      class HD {
+        handleEvent(e) {
+          this[e.type](e)
+        }
+        click() {
+          console.log('单击事件')
+        }
+        mouseover() {
+          console.log('鼠标移动事件')
+        }
+      }
+      app.addEventListener('click', new HD())
+      app.addEventListener('mouseover', new HD())
+    </script>
 </body>
+
 </html>

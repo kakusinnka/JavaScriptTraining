@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST0006</title>
+    <script src="./test0006.js"></script>
+</head>
+
+<body>
+    <!-- 使用方法做为事件处理程序 -->
+    <!-- <input type="text" onkeyup="HD.show()" />
+    <script>
+        class HD {
+            static show() {
+                console.log('houdunren')
+            }
+        }
+    </script> -->
+
+    <!-- 传递事件源对象与事件对象 -->
+    <!-- <button onclick="show(this,'houdunren','hdcms','向军大叔',event)">后盾人</button>
+    <script>
+        // 剩余参数语法允许我们将一个不定数量的参数表示为一个数组
+        function show(...args) {
+            console.log(args)
+        }
+    </script> -->
+
+    <!-- 使用addEventListener来多个事件处理程序 -->
+    <!-- <div id="app">houdunren.com</div>
+    <script>
+        const app = document.querySelector('#app')
+        app.addEventListener('click', function () {
+            this.style.color = 'red'
+        })
+        app.addEventListener('click', function () {
+            this.style.fontSize = '55px'
+        })
+    </script> -->
+
+    <!-- 通过对象绑定 -->
+    <!-- <div id="app">houdunren.com</div>
+    <script>
+        const app = document.querySelector('#app')
+        class HD {
+            handleEvent(e) {
+                this[e.type](e)
+            }
+            click() {
+                console.log('单击事件')
+            }
+            mouseover() {
+                console.log('鼠标移动事件')
+            }
+        }
+        app.addEventListener('click', new HD())
+        app.addEventListener('mouseover', new HD())
+    </script> -->
+
+    <!-- 使用once:true 来指定事件只执行一次 -->
+    <!-- <button id="app">houdunren.com</button>
+    <script>
+        const app = document.querySelector('#app')
+        app.addEventListener(
+            'click',
+            function () {
+                alert('houdunren@向军大叔')
+            },
+            { once: true }
+        )
+    </script> -->
+
+    <!-- 设置 { capture: true } 或直接设置第三个参数为true用来在捕获阶段执行事件 -->
+    <!-- addEventListener的第三个参数传递true/false 和设置 {capture:true/false}是一样 -->
+    <!-- <div id="app" style="background-color: red">
+        <button id="bt">houdunren.com</button>
+    </div>
+    <script>
+        const app = document.querySelector('#app')
+        const bt = document.querySelector('#bt')
+        app.addEventListener(
+            'click',
+            function () {
+                alert('这是div事件 ')
+            },
+            { capture: true }
+        )
+
+        bt.addEventListener(
+            'click',
+            function () {
+                alert('这是按钮事件 ')
+            },
+            { capture: true }
+        )
+    </script> -->
+
+    <!-- 设置 { capture: false } 或直接设置第三个参数为false用来在冒泡阶段执行事件 -->
+    <!-- <div id="app" style="background-color: red">
+        <button id="bt">houdunren.com</button>
+    </div>
+    <script>
+        const app = document.querySelector('#app')
+        const bt = document.querySelector('#bt')
+        app.addEventListener(
+            'click',
+            function () {
+                alert('这是div事件 ')
+            },
+            { capture: false }
+        )
+
+        bt.addEventListener(
+            'click',
+            function () {
+                alert('这是按钮事件 ')
+            },
+            { capture: false }
+        )
+    </script> -->
+
+    <!-- 冒泡行为 -->
+    <!-- <style>
+        #app {
+            background: #34495e;
+            width: 300px;
+            padding: 30px;
+        }
+
+        #app h2 {
+            background-color: #f1c40f;
+            margin-right: -100px;
+        }
+    </style>
+    <div id="app">
+        <h2>houdunren.com</h2>
+    </div>
+    <script>
+        const app = document.querySelector('#app')
+        const h2 = document.querySelector('h2')
+        app.addEventListener('click', (event) => {
+            // 
+            console.log(`event.currentTarget:${event.currentTarget.nodeName}`)
+            //   event.target 可以在事件链中最底层的定义事件的对象
+            console.log(`event.target:${event.target.nodeName}`)
+            console.log('app event')
+        })
+        h2.addEventListener('click', () => {
+            // event.currentTarget == this 即当前执行事件的对象
+            console.log(`event.currentTarget:${event.currentTarget.nodeName}`)
+            //   event.target 可以在事件链中最底层的定义事件的对象
+            console.log(`event.target:${event.target.nodeName}`)
+            console.log(`h2 event`)
+        })
+    </script> -->
+
+    <!-- 阻止冒泡 -->
+    <!-- <style>
+        #app {
+            background: #34495e;
+            width: 300px;
+            padding: 30px;
+        }
+
+        #app h2 {
+            background-color: #f1c40f;
+            margin-right: -100px;
+        }
+    </style>
+    <div id="app">
+        <h2>houdunren.com</h2>
+    </div>
+    <script>
+        const app = document.querySelector('#app')
+        const h2 = document.querySelector('h2')
+        app.addEventListener('click', (event) => {
+            console.log(`event.currentTarget:${event.currentTarget.nodeName}`)
+            console.log(`event.target:${event.target.nodeName}`)
+            console.log('app event')
+        })
+        h2.addEventListener('click', (event) => {
+            // event.stopPropagation() 用于阻止冒泡
+            // event.stopPropagation()
+            // event.stopImmediatePropagation() 阻止事件冒泡并且阻止相同事件的其他事件处理程序被调用
+            event.stopImmediatePropagation()
+            console.log(`event.currentTarget:${event.currentTarget.nodeName}`)
+            console.log(`event.target:${event.target.nodeName}`)
+            console.log(`h2 event`)
+        })
+        h2.addEventListener('click', (event) => {
+            console.log('h2 的第二个事件处理程序')
+        })
+    </script> -->
+
+    <!-- 事件捕获 -->
+    <!-- 事件执行顺序为 捕获 > 事件目标 > 冒泡，在向下传递到目标对象的过程即为事件捕获。事件捕获在实际使用中频率不高。 -->
+    <!-- <style>
+        #app {
+            background: #34495e;
+            width: 300px;
+            padding: 30px;
+        }
+
+        #app h2 {
+            background-color: #f1c40f;
+            margin-right: -100px;
+        }
+    </style>
+    <div id="app">
+        <h2>houdunren.com</h2>
+    </div>
+    <script>
+        const app = document.querySelector('#app')
+        const h2 = document.querySelector('h2')
+        app.addEventListener(
+            'click',
+            (event) => {
+                console.log('app event')
+            },
+            { capture: true }
+        )
+        h2.addEventListener('click', (event) => {
+            console.log(`h2 event`)
+        })
+    </script> -->
+
+    <!-- 事件代理 -->
+    <!-- 为父级UL设置事件来控制子元素LI的样式切换 -->
+    <!-- <style>
+        .hd {
+            border: solid 2px #ddd;
+            background-color: red;
+            color: white;
+        }
+    </style>
+    <ul>
+        <li>houdunren.com</li>
+        <li>hdcms.com</li>
+    </ul>
+
+    <script>
+        'use strict'
+        const ul = document.querySelector('ul')
+        ul.addEventListener('click', () => {
+            // toggle()从列表中删除一个给定的标记 并返回 false 。 如果标记 不存在，则添加并且函数返回 true。
+            if (event.target.tagName === 'LI') event.target.classList.toggle('hd')
+        })
+    </script> -->
+
+    <!-- 使用事件代理来共享事件处理程序，不用为每个元素单独绑定事件 -->
+    <ul>
+        <li data-action="hidden">houdunren.com</li>
+        <li data-action="color" data-color="red">hdcms.com</li>
+    </ul>
+    <script>
+        class HD {
+            constructor(el) {
+                el.addEventListener('click', (e) => {
+                    const action = e.target.dataset.action
+                    this[action](e)
+                })
+            }
+            hidden() {
+                event.target.hidden = true
+            }
+            color() {
+                event.target.style.color = event.target.dataset.color
+            }
+        }
+        new HD(document.querySelector('ul'))
+    </script>
+</body>
+
+</html>
